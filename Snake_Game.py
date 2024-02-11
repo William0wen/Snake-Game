@@ -18,12 +18,20 @@ green = (188, 227, 119)
 score_font = pygame.font.SysFont("consolas", 20)
 exit_font = pygame.font.SysFont("arialblack", 30)
 
+# snake will be 20 * 20px
+snake_x = 490  # centre point horizontally is (1000-20 snake width)/2 =490
+snake_y = 350
+
 
 quit_game = False
 while not quit_game:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             quit_game = True
+
+    # create rect for snake
+    pygame.draw.rect(screen, red, [snake_x, snake_y, 20, 20])
+    pygame.display.update()
 
 
 pygame.quit()
