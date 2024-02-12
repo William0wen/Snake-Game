@@ -1,5 +1,6 @@
 import pygame
 import time
+import random
 pygame.init()
 
 
@@ -13,6 +14,7 @@ black = (0, 0, 0)
 white = (255, 255, 255)
 red = (255, 0, 0)
 green = (188, 227, 119)
+yellow = (255, 255, 0)
 
 # game fonts
 score_font = pygame.font.SysFont("consolas", 20)
@@ -36,6 +38,10 @@ snake_y = 350
 
 snake_x_change = 0  # holds the value of changes in the x co-ord
 snake_y_change = 0
+
+# set a random position for the food to start
+food_x = round(random.randrange(20, 1000 - 20) / 20) * 20
+food_y = round(random.randrange(20, 720 - 20) / 20) * 20
 
 
 quit_game = False
@@ -70,7 +76,17 @@ while not quit_game:
     pygame.draw.rect(screen, red, [snake_x, snake_y, 20, 20])
     pygame.display.update()
 
-    clock.tick(15)  # game runs at 15 fps
+    # create circle for food
+    pygame.draw.circle(screen, yellow, [food_x, food_y], 10)
+    pygame.display.update()
+
+    # food collision detection
+    if snake_x == food_x - 10 and snake_y == food_y - 10:
+        #  set new position for food if snake touches it
+        food_x = round(random.randrange(20, 1000 - 20) / 20) * 20
+        food_y = round(random.randrange(20, 720 - 20) / 20) * 20
+
+    clock.tick(10)  # game runs at 15 fps
 
 message("You died!", black, white)
 pygame.display.update()
