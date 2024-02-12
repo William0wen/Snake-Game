@@ -17,6 +17,16 @@ green = (188, 227, 119)
 # game fonts
 score_font = pygame.font.SysFont("consolas", 20)
 exit_font = pygame.font.SysFont("arialblack", 30)
+msg_font = pygame.font.SysFont("consolas", 20)
+
+
+def message(msg, txt_colour, bkgd_colour):
+    txt = msg_font.render(msg, True, txt_colour, bkgd_colour)
+
+    # centre rect: 1000/2 =500 and 720/2 = 360
+    text_box = txt.get_rect(center=(500, 360))
+    screen.blit(txt, text_box)
+
 
 clock = pygame.time.Clock()  # sets the frame rate
 
@@ -60,8 +70,11 @@ while not quit_game:
     pygame.draw.rect(screen, red, [snake_x, snake_y, 20, 20])
     pygame.display.update()
 
-    clock.tick(15)
+    clock.tick(15)  # game runs at 15 fps
 
+message("You died!", black, white)
+pygame.diisplay.update()
+time.sleep(2)
 
 pygame.quit()
 quit()
