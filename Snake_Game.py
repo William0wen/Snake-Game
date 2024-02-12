@@ -24,6 +24,13 @@ msg_font = pygame.font.SysFont("consolas", 20)
 clock = pygame.time.Clock()  # sets the frame rate
 
 
+# create snake - replaces previous snake drawing section in main loop
+def draw_snake(snake_list):
+    print(f"Snake list: {snake_list}") # for testing
+    for i in snake_list:
+        pygame.draw.rect(screen, red, [1[0], i[i], 20, 20])
+
+
 def message(msg, txt_colour, bkgd_colour):
     txt = msg_font.render(msg, True, txt_colour, bkgd_colour)
 
@@ -42,6 +49,8 @@ def game_loop():
 
     snake_x_change = 0  # holds the value of changes in the x co-ord
     snake_y_change = 0
+    snake_list = []
+    snake_length = 1
 
     # set a random position for the food to start
     food_x = round(random.randrange(20, 1000 - 20) / 20) * 20
@@ -118,7 +127,17 @@ def game_loop():
         screen.fill(green)
 
         # create rect for snake
-        pygame.draw.rect(screen, red, [snake_x, snake_y, 20, 20])
+        snake_head = [snake_x, snake_y]
+        snake_list.append(snake_head)
+        if len(snake_list) > snake_length:
+            del snake_list[0]
+
+           for x in snake_list[:-1]:
+               if x == snake_head:
+                   game_over = True
+
+           draw_snake(snake_list)
+
         pygame.display.update()
 
         # create circle for food
