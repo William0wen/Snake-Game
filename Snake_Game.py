@@ -73,7 +73,7 @@ while not quit_game:
     clock.tick(15)  # game runs at 15 fps
 
 message("You died!", black, white)
-pygame.diisplay.update()
+pygame.display.update()
 time.sleep(2)
 
 pygame.quit()
