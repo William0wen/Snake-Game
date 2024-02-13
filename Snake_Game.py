@@ -144,9 +144,15 @@ def game_loop():
 
             draw_snake(snake_list)
 
-            # keeping track of player score
-            score = snake_length - 1  # score excludes snake head
-            player_score(score, black)
+        # keeping track of player score
+        score = snake_length - 1  # score excludes snake head
+        player_score(score, black)
+
+        # link speed of snake to player score to increase difficulty
+        if score > 10:
+            speed = score
+        else:
+            speed = 10
 
         # using sprite for food
         food = pygame.Rect(food_x, food_y, 20, 20)
@@ -174,7 +180,7 @@ def game_loop():
             # increase length of snake (by original size)
             snake_length += 1
 
-        clock.tick(10)  # game runs at 15 fps
+        clock.tick(speed)  # game runs at 15 fps
 
     pygame.quit()
     quit()
