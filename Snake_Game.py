@@ -24,6 +24,12 @@ msg_font = pygame.font.SysFont("consolas", 20)
 clock = pygame.time.Clock()  # sets the frame rate
 
 
+# display player score in the game
+def player_score(score, score_colour):
+    display_score = score_font.render(f"Score: {score}", True, score_colour)
+    screen.blit(display_score, (800, 20))  # coordinates for top right
+
+
 # create snake - replaces previous snake drawing section in main loop
 def draw_snake(snake_list):
     print(f"Snake list: {snake_list}") # for testing
@@ -55,7 +61,6 @@ def game_loop():
     # set a random position for the food to start
     food_x = round(random.randrange(20, 1000 - 20) / 20) * 20
     food_y = round(random.randrange(20, 720 - 20) / 20) * 20
-
 
     while not quit_game:
         # give user the option to quit or play again when they die
@@ -139,7 +144,11 @@ def game_loop():
 
             draw_snake(snake_list)
 
-        # create circle for food
+            # keeping track of player score
+            score = snake_length - 1  # score excludes snake head
+            player_score(score, black)
+
+        # using sprite for food
         food = pygame.Rect(food_x, food_y, 20, 20)
         apple = pygame.image.load("apple.png").convert_alpha()
         resized_apple = pygame.transform.smoothscale(apple, [20, 20])
