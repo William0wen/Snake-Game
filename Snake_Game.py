@@ -7,7 +7,7 @@ pygame.init()
 screen = pygame.display.set_mode((1000, 720))
 game_icon = pygame.image.load("snake_icon.png")
 pygame.display.set_icon(game_icon)
-pygame.display.set_caption("Snake Game")
+pygame.display.set_caption(" Lights Out Snake Game")
 
 # colour variables
 black = (0, 0, 0)
@@ -211,7 +211,7 @@ def game_loop():
 
         # using sprite for food
         food = pygame.Rect(food_x, food_y, 20, 20)
-        number = random.randint(1, 10)
+        number = random.randint(1, score)
         if number == 1:
             apple = pygame.image.load("rainbow_apple.png").convert_alpha()
         else:
