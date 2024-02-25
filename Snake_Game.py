@@ -211,11 +211,17 @@ def game_loop():
 
         # using sprite for food
         food = pygame.Rect(food_x, food_y, 20, 20)
-        number = random.randint(1, score)
-        if number == 1:
-            apple = pygame.image.load("rainbow_apple.png").convert_alpha()
+
+        # food flickering images difficulty loop
+        if score > 3:
+            number = random.randint(1, score - 2)
+            if number == 1:
+                apple = pygame.image.load("rainbow_apple.png").convert_alpha()
+            else:
+                apple = pygame.image.load("apple.png").convert_alpha()
         else:
-            apple = pygame.image.load("apple.png").convert_alpha()
+            apple = pygame.image.load("rainbow_apple.png").convert_alpha()
+
         resized_apple = pygame.transform.smoothscale(apple, [20, 20])
         screen.blit(resized_apple, food)
         pygame.display.update()
