@@ -13,7 +13,7 @@ pygame.display.set_caption("Snake Game")
 black = (0, 0, 0)
 white = (255, 255, 255)
 red = (255, 0, 0)
-green = (188, 227, 119)
+green = (7, 252, 3)
 yellow = (255, 255, 0)
 
 # game fonts
@@ -65,7 +65,7 @@ def player_score(score, score_colour):
 def draw_snake(snake_list):
     print(f"Snake list: {snake_list}")  # for testing
     for i in snake_list:
-        pygame.draw.rect(screen, red, [i[0], i[1], 20, 20])
+        pygame.draw.rect(screen, green, [i[0], i[1], 20, 20])
 
 
 def message(msg, txt_colour, bkgd_colour):
@@ -106,7 +106,7 @@ def game_loop():
         # give user the option to quit or play again when they die
         while game_over:
             save_high_score(high_score)
-            screen.fill(white)
+            screen.fill(black)
             message(f"You died! (Score: {score}) Press 'Q' to Quit or 'A' to play again",
                     white, black)
             pygame.display.update()
@@ -125,7 +125,7 @@ def game_loop():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 instructions = "Exit: Q to Quit, SPACE to resume, R to reset"
-                message(instructions, white, black)
+                message(instructions, black, white)
                 pygame.display.update()
 
                 end = False
@@ -182,7 +182,7 @@ def game_loop():
         snake_x += snake_x_change
         snake_y += snake_y_change
 
-        screen.fill(green)
+        screen.fill(black)
 
         # create rect for snake
         snake_head = [snake_x, snake_y]
@@ -198,7 +198,7 @@ def game_loop():
 
         # keeping track of player score
         score = round(snake_length)
-        player_score(score, black)
+        player_score(score, white)
 
         # get high score
         high_score = update_high_score(score, high_score)
@@ -211,7 +211,7 @@ def game_loop():
 
         # using sprite for food
         food = pygame.Rect(food_x, food_y, 20, 20)
-        number = random.randint(1, 20)
+        number = random.randint(1, 10)
         if number == 1:
             apple = pygame.image.load("rainbow_apple.png").convert_alpha()
         else:
