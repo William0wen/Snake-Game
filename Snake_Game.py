@@ -213,8 +213,8 @@ def game_loop():
         food = pygame.Rect(food_x, food_y, 20, 20)
 
         # food flickering images difficulty loop
-        if score > 3:
-            number = random.randint(1, score - 2)
+        if score > 2:
+            number = random.randint(1, score - 1)
             if number == 1:
                 apple = pygame.image.load("rainbow_apple.png").convert_alpha()
             else:
